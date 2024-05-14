@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import HowToPlay from "./HowToPlay";
+import { ModeToggle } from "./DarkModeToggle";
 
 const Navbar = () => {
   return (
@@ -11,7 +14,10 @@ const Navbar = () => {
             spelling <span className="bg-yellow-300">bee</span>
           </Link>
           <div className="flex items-center gap-8">
+            <ModeToggle />
             <HowToPlay />
+            <Link href="/en">EN</Link>
+            <Link href="/tr">TR</Link>
           </div>
         </div>
       </MaxWidthWrapper>

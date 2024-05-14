@@ -11,8 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 export default function HowToPlay() {
+  const t = useTranslations("Index");
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,37 +22,25 @@ export default function HowToPlay() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center">How to play</DialogTitle>
-          <DialogDescription>
-            Create words using letters from the hive and try to get the maximum
-            score.
-          </DialogDescription>
+          <DialogTitle className="text-center">{t("howToPlay")}</DialogTitle>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col space-x-2 gap-2 text-sm">
           <ul className="list-disc">
-            <li>Words must have at least four letters.</li>
-            <li>Words must include the center letter.</li>
-            <li>Letters can be used more than once.</li>
-            <li>
-              Words with hyphens, proper nouns, vulgarities, and especially
-              obscure words are not in the word list.
-            </li>
+            <li>{t("atLeastFourLetters")}</li>
+            <li>{t("centerLetter")}</li>
+            <li>{t("moreThanOnce")}</li>
+            <li>{t("hypens")}</li>
           </ul>
-          <p className="font-semibold">
-            Score points to increase your rating. 4-letter words are worth 1
-            point
-          </p>
+          <p className="font-semibold">{t("scorePoints")}</p>
           <ul className="list-disc">
-            <li> 4-letter words are worth 1 point each. </li>
-            <li> Longer words earn 1 point per letter. </li>
-            <li>
-              Each puzzle includes at least one “pangram” which uses every
-              letter. These are worth 7 extra points!
-            </li>
+            <li>{t("fourLetterWords")} </li>
+            <li> {t("longerWords")} </li>
+            <li>{t("pangram")}</li>
           </ul>
         </div>
         <DialogFooter className="sm:justify-start">
-          Feedback: aydinterzi7@gmail.com
+          {t("feedback")}: aydinterzi7@gmail.com
         </DialogFooter>
       </DialogContent>
     </Dialog>

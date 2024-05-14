@@ -10,7 +10,7 @@ export default async function Index() {
   return (
     <div>
       <MaxWidthWrapper>
-        <Hive />
+        <Hive words={data[Math.floor(Math.random() * data.length)]} />
       </MaxWidthWrapper>
     </div>
   );

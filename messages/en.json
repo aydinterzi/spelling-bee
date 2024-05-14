@@ -1,5 +1,23 @@
 {
   "Index": {
-    "title": "Hello world!"
+    "findedWords": "Finded words",
+    "score": "Score",
+    "delete": "Delete",
+    "enterWord": "Enter",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "howToPlay": "How to play",
+    "description": "Create words using letters from the hive and try to get the maximum score.",
+    "atLeastFourLetters": "Words must have at least four letters",
+    "centerLetter": "Words must include the center letter",
+    "moreThanOnce": "Letters can be used more than once",
+    "hypens": "Words with hyphens, proper nouns, vulgarities, and especially obscure words are not in the word list",
+    "scorePoints": "Score points to increase your rating. 4-letter words are worth 1 point",
+    "fourLetterWords": "4-letter words are worth 1 point each",
+    "longerWords": "Longer words earn 1 point per letter",
+    "pangram": "Each puzzle includes at least one “pangram” which uses every letter. These are worth 7 extra points!",
+    "feedback": "Feedback",
+    "timeUp": "Time is up! Your score is"
   }
 }
