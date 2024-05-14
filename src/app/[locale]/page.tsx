@@ -1,12 +1,12 @@
 import Hive from "@/components/Hive";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
-import { useTranslations } from "next-intl";
-
-export default function Index() {
-  const t = useTranslations("Index");
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 600);
+export default async function Index() {
+  const res = await fetch("http://localhost:3000/word/en", {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  console.log(data);
   return (
     <div>
       <MaxWidthWrapper>

@@ -10,7 +10,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -36,6 +35,7 @@ const Hive = () => {
   } = useTimer({
     expiryTimestamp: time,
     onExpire: () => console.warn("onExpire called"),
+    autoStart: false,
   });
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -49,7 +49,6 @@ const Hive = () => {
   const handleEnter = () => {
     setFindedWords((prev) => [...prev, word]);
     setWord("");
-    // Zamanlayıcıyı kontrol et
     if (isRunning) {
       const remainingSeconds =
         seconds + minutes * 60 + hours * 3600 + days * 86400;
@@ -66,7 +65,10 @@ const Hive = () => {
   };
 
   const handleRestartGame = () => {
-    restart(time);
+    const restartTime = new Date();
+    restartTime.setSeconds(restartTime.getSeconds() + 60);
+    restart(restartTime);
+    pause();
     setWord("");
     setFindedWords([]);
   };
@@ -81,7 +83,7 @@ const Hive = () => {
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Finded words" />
           </SelectTrigger>
-          <SelectContent defaultValue={findedWords[0]}>
+          <SelectContent>
             <SelectGroup>
               {findedWords.map((word) => (
                 <SelectItem disabled key={word} value={word}>
@@ -96,7 +98,7 @@ const Hive = () => {
         </div>
       </div>
 
-      <div className="mt-10 mx-auto w-[400px] h-[400px] flex flex-col items-center">
+      <div className="mt-10 mx-auto w-[400px] h-[400px] flex flex-col items-center gap-10">
         <div className="flex gap-4">
           <Button onClick={handleStartGame}>Start game</Button>
           <Button onClick={handleRestartGame}>Restart game</Button>
@@ -115,7 +117,11 @@ const Hive = () => {
           </div>
           <div className="flex ">
             <HiveItem letter="C" handleClick={handleClick} />
-            <HiveItem letter="D" handleClick={handleClick} />
+            <HiveItem
+              classNames="!text-yellow-400"
+              letter="D"
+              handleClick={handleClick}
+            />
             <HiveItem letter="E" handleClick={handleClick} />
           </div>
           <div className="flex ">

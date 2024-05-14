@@ -1,5 +1,5 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
-export default function Home() {
+export default async function Home() {
   return <MaxWidthWrapper>tasdest</MaxWidthWrapper>;
 }
