@@ -21,7 +21,7 @@ type Words = {
   words: string[];
 };
 
-const Hive = ({ data }: { data: Words }) => {
+const Hive = ({ data }: { data: Words[] }) => {
   const [words, setWords] = useState<Words>();
   const t = useTranslations("Index");
   const { toast } = useToast();
@@ -49,7 +49,8 @@ const Hive = ({ data }: { data: Words }) => {
   );
 
   useEffect(() => {
-    const words = data[Math.floor(Math.random() * data.length)];
+    const randomNumber = Math.floor(Math.random() * data.length) as number;
+    const words = data[randomNumber];
     setWords(words);
   }, [data]);
 
@@ -66,6 +67,12 @@ const Hive = ({ data }: { data: Words }) => {
   const handleWordFinded = (word: string) => {
     setFindedWords((prev) => [...prev, word]);
     setWords((prev) => {
+      if (!prev) {
+        return {
+          words: [],
+          randomLetters: "",
+        };
+      }
       return {
         ...prev,
         words: prev.words.filter((w) => w !== word),
@@ -88,7 +95,7 @@ const Hive = ({ data }: { data: Words }) => {
   };
 
   const handleEnter = () => {
-    if (words.words.includes(word)) {
+    if (words?.words.includes(word)) {
       handleWordFinded(word);
     } else {
       toast({
