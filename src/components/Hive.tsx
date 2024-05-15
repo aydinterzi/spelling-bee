@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HiveItem from "./HiveItem";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -14,16 +14,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
+import { useToast } from "./ui/use-toast";
 
 type Words = {
   randomLetters: string;
   words: string[];
 };
 
-const Hive = ({ words }: { words: Words }) => {
+const Hive = ({ data }: { data: Words }) => {
+  const [words, setWords] = useState<Words>();
   const t = useTranslations("Index");
-
-  const randomLetters = words.randomLetters.split("");
+  const { toast } = useToast();
   const time = new Date();
   time.setSeconds(time.getSeconds() + 60);
   const [score, setScore] = useState<number>(0);
@@ -46,6 +47,13 @@ const Hive = ({ words }: { words: Words }) => {
       },
     }
   );
+
+  useEffect(() => {
+    const words = data[Math.floor(Math.random() * data.length)];
+    setWords(words);
+  }, [data]);
+
+  const randomLetters = words?.randomLetters.split("");
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleEnter();
@@ -57,39 +65,37 @@ const Hive = ({ words }: { words: Words }) => {
 
   const handleWordFinded = (word: string) => {
     setFindedWords((prev) => [...prev, word]);
+    setWords((prev) => {
+      return {
+        ...prev,
+        words: prev.words.filter((w) => w !== word),
+      };
+    });
+    const score = word.length === 7 ? 7 : word.length - 3;
     if (word.length === 7) {
-      setScore((prev) => prev + 7);
+      setScore((prev) => prev + score);
     } else {
-      setScore((prev) => prev + word.length - 3);
+      setScore((prev) => prev + score);
     }
     const remainingSeconds =
       seconds + minutes * 60 + hours * 3600 + days * 86400;
     const extendedTime = new Date();
     extendedTime.setSeconds(extendedTime.getSeconds() + 15 + remainingSeconds);
     restart(extendedTime);
+    toast({
+      title: "+ " + score,
+    });
   };
 
   const handleEnter = () => {
     if (words.words.includes(word)) {
       handleWordFinded(word);
+    } else {
+      toast({
+        title: t("wordNotFound"),
+      });
     }
-
     setWord("");
-  };
-
-  const handleStartGame = () => {
-    const startTime = new Date();
-    startTime.setSeconds(startTime.getSeconds() + 60);
-    restart(startTime);
-  };
-
-  const handleRestartGame = () => {
-    const restartTime = new Date();
-    restartTime.setSeconds(restartTime.getSeconds() + 60);
-    restart(restartTime);
-    pause();
-    setWord("");
-    setFindedWords([]);
   };
 
   return (
@@ -100,7 +106,7 @@ const Hive = ({ words }: { words: Words }) => {
       <div className="flex justify-between">
         <Select>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Finded words" />
+            <SelectValue placeholder={t("findedWords")} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -132,36 +138,38 @@ const Hive = ({ words }: { words: Words }) => {
           className="border-none text-3xl w-[250px] focus:outline-none"
         />
 
-        <div className="flex flex-col justify-center items-center -space-y-4">
-          <div className="flex ">
-            <HiveItem letter={randomLetters[1]} handleClick={handleClick} />
-            <HiveItem letter={randomLetters[2]} handleClick={handleClick} />
-          </div>
-          <div className="flex ">
-            <HiveItem letter={randomLetters[3]} handleClick={handleClick} />
-            <HiveItem
-              classNames="!text-yellow-400"
-              letter={randomLetters[0]}
-              handleClick={handleClick}
-            />
-            <HiveItem letter={randomLetters[4]} handleClick={handleClick} />
-          </div>
-          <div className="flex ">
-            <HiveItem letter={randomLetters[5]} handleClick={handleClick} />
-            <HiveItem letter={randomLetters[6]} handleClick={handleClick} />
-          </div>
-          <div className="flex !mt-10 gap-5">
-            <Button
-              onClick={() =>
-                setWord((prev) => prev.substring(0, prev.length - 1))
-              }
-            >
-              {t("delete")}
-            </Button>
+        {randomLetters && (
+          <div className="flex flex-col justify-center items-center -space-y-4">
+            <div className="flex ">
+              <HiveItem letter={randomLetters[1]} handleClick={handleClick} />
+              <HiveItem letter={randomLetters[2]} handleClick={handleClick} />
+            </div>
+            <div className="flex ">
+              <HiveItem letter={randomLetters[3]} handleClick={handleClick} />
+              <HiveItem
+                classNames="!text-yellow-400"
+                letter={randomLetters[0]}
+                handleClick={handleClick}
+              />
+              <HiveItem letter={randomLetters[4]} handleClick={handleClick} />
+            </div>
+            <div className="flex ">
+              <HiveItem letter={randomLetters[5]} handleClick={handleClick} />
+              <HiveItem letter={randomLetters[6]} handleClick={handleClick} />
+            </div>
+            <div className="flex !mt-10 gap-5">
+              <Button
+                onClick={() =>
+                  setWord((prev) => prev.substring(0, prev.length - 1))
+                }
+              >
+                {t("delete")}
+              </Button>
 
-            <Button onClick={handleEnter}>{t("enterWord")}</Button>
+              <Button onClick={handleEnter}>{t("enterWord")}</Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

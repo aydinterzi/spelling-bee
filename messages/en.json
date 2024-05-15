@@ -18,6 +18,7 @@
     "longerWords": "Longer words earn 1 point per letter",
     "pangram": "Each puzzle includes at least one “pangram” which uses every letter. These are worth 7 extra points!",
     "feedback": "Feedback",
-    "timeUp": "Time is up! Your score is"
+    "timeUp": "Time is up! Your score is",
+    "wordNotFound": "Word not found"
   }
 }

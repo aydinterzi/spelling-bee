@@ -10,6 +10,7 @@
     "howToPlay": "Nasıl Oynanır",
     "description": "Kovandan gelen harfleri kullanarak kelimeler oluşturun ve maksimum puanı almaya çalışın.",
     "atLeastFourLetters": "Kelimeler en az dört harften oluşmalıdır",
+    "centerLetter": "Kelimeler, ortadaki harf içermelidir",
     "moreThanOnce": "Harfler birden fazla kullanılabilir",
     "hypens": "Kısa çizgi içeren kelimeler, özel isimler, kaba sözler ve özellikle anlaşılması güç kelimeler kelime listesinde yer almıyor",
     "scorePoints": "Derecelendirmenizi artırmak için puan toplayın. 4 harfli kelimeler 1 puan değerindedir",
@@ -17,6 +18,7 @@
     "longerWords": "Daha uzun kelimeler harf başına 1 puan kazandırır",
     "pangram": "Her bulmaca, her harfin kullanıldığı en az bir “pangram” içerir. Bunlar 7 ekstra puan değerinde!",
     "feedback": "Geri bildirim",
-    "timeUp": "Süre doldu! Skorun"
+    "timeUp": "Süre doldu! Skorun",
+    "wordNotFound": "Kelime bulunamadı"
   }
 }

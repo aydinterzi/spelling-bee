@@ -16,8 +16,12 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <ModeToggle />
             <HowToPlay />
-            <Link href="/en">EN</Link>
-            <Link href="/tr">TR</Link>
+            <Link prefetch={false} href="/en">
+              EN
+            </Link>
+            <Link prefetch={false} href="/tr">
+              TR
+            </Link>
           </div>
         </div>
       </MaxWidthWrapper>
