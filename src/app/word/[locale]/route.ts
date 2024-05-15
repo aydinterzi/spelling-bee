@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { words } from "@/lib/data";
 
 export async function GET(
