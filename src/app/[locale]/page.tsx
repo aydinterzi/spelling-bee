@@ -6,7 +6,7 @@ export default async function Index({
 }: {
   params: { locale: string };
 }) {
-  const data = words[params.locale];
+  const data = words[params.locale as keyof typeof words];
 
   return (
     <div>
