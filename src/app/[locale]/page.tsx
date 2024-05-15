@@ -1,16 +1,12 @@
 import Hive from "@/components/Hive";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-
+import words from "@/lib/words.json";
 export default async function Index({
   params,
 }: {
   params: { locale: string };
 }) {
-  const res = await fetch(`${process.env.URL}/word/${params.locale}`, {
-    cache: "no-store",
-  });
-
-  const data = await res.json();
+  const data = words[params.locale];
 
   return (
     <div>
