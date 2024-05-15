@@ -6,7 +6,7 @@ export default async function Index({
 }: {
   params: { locale: string };
 }) {
-  const res = await fetch(`http://127.0.0.1:3000/word/${params.locale}`, {
+  const res = await fetch(`${process.env.URL}/word/${params.locale}`, {
     cache: "no-store",
   });
 
