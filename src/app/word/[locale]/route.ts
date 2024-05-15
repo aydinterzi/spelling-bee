@@ -4,5 +4,6 @@ export async function GET(
   request: Request,
   { params }: { params: { locale: string } }
 ) {
-  return Response.json(words[params.locale]);
+  const locale = params.locale as keyof typeof words;
+  return Response.json(words[locale]);
 }
