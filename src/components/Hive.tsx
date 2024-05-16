@@ -33,8 +33,8 @@ const Hive = ({ data }: { data: Words[] }) => {
   const handleClick = (letter: string) => {
     setWord((prev) => prev + letter);
   };
-  const { seconds, minutes, hours, days, isRunning, pause, restart } = useTimer(
-    {
+  const { seconds, minutes, hours, days, isRunning, pause, restart, resume } =
+    useTimer({
       expiryTimestamp: time,
       onExpire: () => {
         alert(t("timeUp") + score);
@@ -45,8 +45,7 @@ const Hive = ({ data }: { data: Words[] }) => {
         restart(restartTime);
         pause();
       },
-    }
-  );
+    });
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * data.length) as number;
@@ -66,6 +65,9 @@ const Hive = ({ data }: { data: Words[] }) => {
 
   const handleWordFinded = (word: string) => {
     setFindedWords((prev) => [...prev, word]);
+    if (!isRunning) {
+      resume();
+    }
     setWords((prev) => {
       if (!prev) {
         return {
