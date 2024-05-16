@@ -18,7 +18,7 @@
     "longerWords": "Daha uzun kelimeler harf başına 1 puan kazandırır",
     "pangram": "Her bulmaca, her harfin kullanıldığı en az bir “pangram” içerir. Bunlar 7 ekstra puan değerinde!",
     "feedback": "Geri bildirim",
-    "timeUp": "Süre doldu! Skorun",
+    "timeUp": "Süre doldu! Skorun ",
     "wordNotFound": "Kelime bulunamadı"
   }
 }

@@ -142,7 +142,7 @@ const Hive = ({ data }: { data: Words[] }) => {
             setWord(e.target.value.toLocaleUpperCase());
           }}
           type="text"
-          className="border-none text-3xl w-[250px] focus:outline-none"
+          className="text-3xl w-[250px]"
         />
 
         {randomLetters && (
